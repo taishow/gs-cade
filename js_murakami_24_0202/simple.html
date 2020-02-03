@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chatアプリ</title>
+    <style>
+      .container {
+        margin: 0 auto;
+        max-width: 900px;
+      }
+      #output {
+        border: 1px solid black;
+      }
+      h1 {
+        font-size: 24px;
+        color: #000000;
+        line-height: 1.25em;
+        padding-top: 5px;
+      }
+      h2 {
+        background: #ec7c7c;
+        color: #fff;
+        border: none;
+        font-size: 17px;
+        padding: 13px 7px;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        -khtml-border-radius: 2px;
+        border-radius: 2px;
+        margin-top: 40px;
+        font-weight: bold;
+        padding-left: 2em;
+        text-indent: -0.75em;
+      }
+      h3 {
+        margin: 0;
+        padding: 5px 5px 0px 78px;
+        border-left: none;
+        border-bottom: dotted 1px #ccc;
+        display: block;
+        background: #fceeee;
+        text-indent: -78px;
+      }
+
+      #contents {
+        border-bottom: 1px dotted black;
+        margin: 10px;
+      }
+      .form {
+        width: 45%;
+      }
+      .unform {
+        width: 45%;
+      }
+      .flex {
+        display: flex;
+        justify-content: space-around;
+      }
+      #title {
+        font-weight: bold;
+      }
+      section {
+        border: 1px solid black;
+        padding: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ブラウザの画面に見える内容 -->
+    <div class="container">
+      <section>
+        <h1>pairs（ペアーズ）の口コミ・評判</h1>
+        <p><img src="imgs/pairs.jpg" /></p>
+        <h2>pairs（ペアーズ）の特徴</h2>
+        <h3>日本最大級の会員数と豊富な実績</h3>
+        <p>
+          pairs（ペアーズ）
+          は2012年にリリースされたフェイスブックで使えるマッチングアプリです。サービスの開始当初から口コミで人気が広がり、すでに会員は1000万人（※2019年8月時点）を突破しています。Facebookの婚活アプリは数多くありますが、1000万人という会員数はトップクラスの数字です。マッチングアプリと言えpairs（ペアーズ）だと言っていいほどの知名度と実績があります。
+        </p>
+        <h3>業界トップクラスのマッチング率の高さ</h3>
+        <p>
+          マッチングアプリの中でもpairs（ペアーズ）の人気が高いのはマッチング率の高さです。累計3200万組以上がマッチングしています。細かい条件検索やコミュニティ機能、レコメンド機能が充実しているので、好みの異性が見つけやすく、マッチングしやすい環境が整っています。
+        </p>
+        <h3>安心・安全に利用できる仕組み</h3>
+        <p>
+          ペアーズでは安心安全に利用できるようにするための取り組みがしっかりしています。Facebookのアカウント必須になること、身分証による年齢確認が徹底されていること、24時間365日の厳重な監視体制があるので、安心安全に利用することができます。Facebookのアカウント必須になると言っても、実名は表示されませんし、Facebookにはアプリを利用していることは表示されないので、友達にバレる心配もありません。
+        </p>
+
+        <h2>pairs（ペアーズ）の口コミ・評判</h2>
+        <div class="flex">
+          <div class="unform">
+            <!-- 保存されたデータが表示される箇所 -->
+            <div id="output"></div>
+          </div>
+
+          <div class="form">
+            <div>
+              <!-- 名前 -->
+              タイトル
+              <input type="text" id="username" />
+            </div>
+
+            <div>
+              <!-- テキストエリア -->
+              口コミ
+              <textarea name="" id="text" cols="30" rows="10"></textarea>
+            </div>
+            <div>
+              <!-- 年齢 -->
+              年齢
+              <input type="text" id="age" />
+            </div>
+            <div>
+              <!-- 性別 -->
+              性別
+              <input type="text" id="sex" />
+            </div>
+            <div>
+              <!-- 職業 -->
+              職業
+              <input type="text" id="job" />
+            </div>
+
+            <div>
+              <!-- 送信ボタン -->
+              <button id="send">送信</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!--/ ブラウザの画面に見える内容 -->
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!--** 以下Firebase **-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDL4iSMQCnVtIIbFrok1t7RSNCmVgb7Xp4",
+        authDomain: "js-murakami-24.firebaseapp.com",
+        databaseURL: "https://js-murakami-24.firebaseio.com",
+        projectId: "js-murakami-24",
+        storageBucket: "js-murakami-24.appspot.com",
+        messagingSenderId: "543963104542",
+        appId: "1:543963104542:web:ba8f855fbac2630da7350f"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      //firebaseのデーターベース（保存させる場所）を使いますよと言うjsのコードを貼り付ける
+
+      // xxxxxスクリプトを貼り付ける
+      const newPostRef = firebase.database().ref();
+
+      // ここから下にjqueryの処理を書いて練習します
+      // 送信ボタンをクリックされたら次の処理をする
+      $("#send").on("click", function() {
+        newPostRef.push({
+          username: $("#username").val(),
+          text: $("#text").val(),
+          age: $("#age").val(),
+          sex: $("#sex").val(),
+          job: $("#job").val()
+        });
+        $("#text").val("");
+        $("#username").val("");
+        $("#age").val("");
+        $("#sex").val("");
+        $("#job").val("");
+      });
+
+      // 受信処理
+
+      newPostRef.on("child_added", function(data) {
+        let v = data.val();
+        let str = `<div id="contents">
+          <p id="title">${v.username}</p>
+          <p id="status">${v.age}/${v.sex}/${v.job}</p>
+          <p id="kutikomi">${v.text}</p>
+        </div>`;
+        $("#output").prepend(str);
+        // let title = `<p>${v.username}</p>`;
+        // $("#title").prepend(title);
+        // let kutikomi = `<p>${v.text}</p>`;
+        // $("#kutikomi").prepend(kutikomi);
+      });
+    </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  </body>
+</html>
